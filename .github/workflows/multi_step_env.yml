@@ -1,0 +1,32 @@
+name: 3. Multi Step & Env Action
+
+on:
+  push:
+    branches:
+      - main                        # main 브랜치 push 시 실행
+
+env:                                # 전역 환경 변수 정의 영역
+  USER_NAME: "대장"
+  PROJECT_NAME: "GitHub Actions 연습"
+  VERSION: "1.0"
+
+jobs:
+  multi-step:
+    runs-on: ubuntu-latest
+    steps:
+      # 1단계: 환경 변수를 활용한 출력
+      - name: 1단계 - 시작 확인
+        run: |                      # 파이프(|)로 여러 줄 명령어를 순서대로 실행
+          echo "${{ env.USER_NAME }}님, 작업을 시작합니다."
+          echo "프로젝트: ${{ env.PROJECT_NAME }}"
+
+      # 2단계: 단순 텍스트 출력 (작업 진행 상황)
+      - name: 2단계 - 작업 진행
+        run: |
+          echo "작업을 진행 중입니다..."
+          echo "설정 적용 완료!"
+
+      # 3단계: 환경 변수와 텍스트를 혼합하여 최종 결과 출력
+      - name: 3단계 - 완료 보고
+        run: |
+          echo "버전 ${{ env.VERSION }} 작업이 완료되었습니다."
