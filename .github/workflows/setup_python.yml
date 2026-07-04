@@ -1,0 +1,21 @@
+name: 4. Setup Python Action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest          # 최신 우분투 가상 머신(Runner) 대여
+    steps:
+      - name: 코드 가져오기
+        uses: actions/checkout@v4   # 저장소의 코드를 빈 가상 머신 안으로 복사
+
+      - name: 파이썬 설치하기
+        uses: actions/setup-python@v5   # 가상 머신에 Python 설치
+        with:
+          python-version: '3.10'        # 설치할 Python 버전 지정
+
+      - name: 파이썬 코드 실행하기
+        run: python -c "print('GitHub Actions에서 파이썬이 정상적으로 실행됩니다!')"
